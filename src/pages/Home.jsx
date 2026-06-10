@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Bot, BarChart3, FileBadge, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import AuthModal from '../components/AuthModal';
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -12,6 +14,8 @@ const stagger = {
 };
 
 const Home = () => {
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
   return (
     <div className="w-full">
       {/* Hero Section */}
@@ -35,7 +39,10 @@ const Home = () => {
                 Practice with an AI interviewer that thinks, evaluates, and coaches like a real Google engineer.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <button className="bg-primary hover:bg-blue-600 text-white px-8 py-4 rounded-md font-semibold text-lg transition-all shadow-[0_0_20px_rgba(79,142,247,0.4)] flex items-center justify-center gap-2">
+                <button 
+                  onClick={() => setIsAuthModalOpen(true)}
+                  className="bg-primary hover:bg-blue-600 text-white px-8 py-4 rounded-md font-semibold text-lg transition-all shadow-[0_0_20px_rgba(79,142,247,0.4)] flex items-center justify-center gap-2"
+                >
                   Start Free Interview <ArrowRight className="w-5 h-5" />
                 </button>
                 <Link to="/how-it-works" className="bg-transparent border border-border hover:border-textMuted text-textPrimary px-8 py-4 rounded-md font-semibold text-lg transition-colors flex items-center justify-center gap-2">
@@ -175,11 +182,16 @@ const Home = () => {
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
           <h2 className="text-4xl font-bold mb-6">Ready to crack your dream job?</h2>
           <p className="text-xl text-textMuted mb-10">Stop failing interviews because of lack of practice. Start your first session today.</p>
-          <button className="bg-primary hover:bg-blue-600 text-white px-10 py-5 rounded-md font-bold text-xl transition-all shadow-[0_0_30px_rgba(79,142,247,0.5)]">
+          <button 
+            onClick={() => setIsAuthModalOpen(true)}
+            className="bg-primary hover:bg-blue-600 text-white px-10 py-5 rounded-md font-bold text-xl transition-all shadow-[0_0_30px_rgba(79,142,247,0.5)]"
+          >
             Start Interview Now
           </button>
         </div>
       </section>
+      {/* Auth Modal */}
+      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
     </div>
   );
 };

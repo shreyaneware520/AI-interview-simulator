@@ -1,9 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
 import { BrainCircuit, Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import AuthModal from './AuthModal';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const location = useLocation();
 
   const navLinks = [
@@ -46,7 +48,10 @@ const Navbar = () => {
 
           {/* CTA */}
           <div className="hidden md:block">
-            <button className="bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors shadow-[0_0_15px_rgba(79,142,247,0.3)]">
+            <button 
+              onClick={() => setIsAuthModalOpen(true)}
+              className="bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors shadow-[0_0_15px_rgba(79,142,247,0.3)]"
+            >
               Start Interview
             </button>
           </div>
@@ -81,12 +86,17 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <button className="w-full text-left mt-4 bg-primary hover:bg-blue-600 text-white px-3 py-2 rounded-md text-base font-medium transition-colors">
+            <button 
+              onClick={() => { setIsOpen(false); setIsAuthModalOpen(true); }}
+              className="w-full text-left mt-4 bg-primary hover:bg-blue-600 text-white px-3 py-2 rounded-md text-base font-medium transition-colors"
+            >
               Start Interview
             </button>
           </div>
         </div>
       )}
+      {/* Auth Modal */}
+      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
     </nav>
   );
 };
