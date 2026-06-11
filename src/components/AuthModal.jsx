@@ -11,6 +11,7 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
+          onClick={onClose}
         >
           <motion.div 
             className="bg-card border border-border w-full max-w-md rounded-2xl shadow-2xl relative overflow-hidden"
@@ -18,6 +19,7 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
             transition={{ duration: 0.2 }}
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="absolute top-4 right-4">
               <button 
