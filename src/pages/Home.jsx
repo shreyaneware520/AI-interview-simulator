@@ -3,6 +3,7 @@ import { ArrowRight, Bot, BarChart3, FileBadge, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import AuthModal from '../components/AuthModal';
+import OnboardingFlow from '../components/OnboardingFlow';
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -15,6 +16,7 @@ const stagger = {
 
 const Home = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isOnboardingOpen, setIsOnboardingOpen] = useState(false);
 
   return (
     <div className="w-full">
@@ -191,7 +193,17 @@ const Home = () => {
         </div>
       </section>
       {/* Auth Modal */}
-      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+        onSuccess={() => { setIsAuthModalOpen(false); setIsOnboardingOpen(true); }}
+      />
+
+      {/* Onboarding Flow */}
+      <OnboardingFlow 
+        isOpen={isOnboardingOpen} 
+        onClose={() => setIsOnboardingOpen(false)} 
+      />
     </div>
   );
 };

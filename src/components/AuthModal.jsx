@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
-const AuthModal = ({ isOpen, onClose }) => {
+const AuthModal = ({ isOpen, onClose, onSuccess }) => {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -32,7 +32,7 @@ const AuthModal = ({ isOpen, onClose }) => {
               <h2 className="text-2xl font-bold mb-2">Create your account</h2>
               <p className="text-textMuted text-sm mb-6">Start your first free interview session today.</p>
               
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); onSuccess(); }}>
                 <div>
                   <label className="block text-sm font-medium text-textPrimary mb-1" htmlFor="name">Name</label>
                   <input 

@@ -2,10 +2,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { BrainCircuit, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import AuthModal from './AuthModal';
+import OnboardingFlow from './OnboardingFlow';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isOnboardingOpen, setIsOnboardingOpen] = useState(false);
   const location = useLocation();
 
   const navLinks = [
@@ -96,7 +98,17 @@ const Navbar = () => {
         </div>
       )}
       {/* Auth Modal */}
-      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+        onSuccess={() => { setIsAuthModalOpen(false); setIsOnboardingOpen(true); }}
+      />
+
+      {/* Onboarding Flow */}
+      <OnboardingFlow 
+        isOpen={isOnboardingOpen} 
+        onClose={() => setIsOnboardingOpen(false)} 
+      />
     </nav>
   );
 };
