@@ -19,3 +19,5 @@ test
 ## Updates
 - Improved login flow
 - Added test contribution
+
+Testing GitHub contribution tracking 🚀
