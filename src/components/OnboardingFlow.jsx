@@ -33,10 +33,9 @@ const OnboardingFlow = ({ isOpen, onClose }) => {
 
   const handleStartInterview = () => {
     onClose();
-    // In a real app, this would navigate to the interview session.
-    // For now, we can route to home or a dummy session route.
-    navigate('/');
-    alert("Starting interview session...");
+    navigate('/interview', { 
+      state: { topic: selectedTopic, experience: selectedExperience, language: selectedLanguage, goals: selectedGoals } 
+    });
   };
 
   const nextStep = () => setStep(s => Math.min(s + 1, 3));
